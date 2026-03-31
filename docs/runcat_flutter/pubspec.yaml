@@ -1,0 +1,69 @@
+name: runcat_flutter
+description: RunCat Flutter 重构版本 - 显示系统繁忙程度的动态系统托盘应用程序
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # 桌面应用支持
+  window_manager: ^0.3.7
+  system_tray: ^2.0.3
+  
+  # 状态管理
+  flutter_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
+  
+  # 数据持久化
+  shared_preferences: ^2.2.2
+  
+  # Windows API
+  win32: ^5.1.1
+  ffi: ^2.1.0
+  
+  # 国际化
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  
+  # 系统监控
+  system_info2: ^4.0.0
+  
+  # 工具
+  path: ^1.8.3
+
+ dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  
+  # 代码生成
+  build_runner: ^2.4.7
+  freezed: ^2.4.6
+  json_annotation: ^4.8.1
+  riverpod_generator: ^2.3.9
+  
+  # 代码生成注解
+  freezed_annotation: ^2.4.1
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+  
+  # 资源文件
+  assets:
+    - assets/images/
+    - assets/animations/
+    
+  # 字体
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
