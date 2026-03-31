@@ -9,12 +9,12 @@
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
     <AssemblyName>RunCat 365</AssemblyName>
     <ApplicationIcon>resources\app_icon.ico</ApplicationIcon>
-    <Authors>Takuto Nakamura</Authors>
-    <Company>Studio Kyome</Company>
-    <Description>A cute running cat animation on your taskbar.</Description>
-    <Copyright>© 2022 Takuto Nakamura</Copyright>
-    <PackageProjectUrl>https://kyome22.github.io/RunCat365/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Kyome22/RunCat365</RepositoryUrl>
+    <Authors>makise</Authors>
+    <Company>makise</Company>
+    <Description>在 Windows 任务栏上奔跑的可爱猫咪动画</Description>
+    <Copyright>© 2026 makise</Copyright>
+    <PackageProjectUrl>https://github.com/makise/RunCat-MD3</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/makise/RunCat-MD3</RepositoryUrl>
     <PackageTags>cpu;cat;taskbar</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>app_icon.png</PackageIcon>
