@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:math' as math;
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/runner_character.dart';
@@ -135,8 +135,10 @@ class _CharacterPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // 使用高质量缩放避免像素化
     final paint = Paint()
-      ..filterQuality = FilterQuality.none; // 保持像素风格清晰度
+      ..filterQuality = FilterQuality.high  // 高质量缩放
+      ..isAntiAlias = true;
 
     final srcRect = Rect.fromLTWH(
       0,
@@ -145,7 +147,7 @@ class _CharacterPainter extends CustomPainter {
       image.height.toDouble(),
     );
 
-    // 计算居中缩放
+    // 计算居中缩放，保持原始比例
     final imageAspectRatio = image.width / image.height;
     final widgetAspectRatio = size.width / size.height;
     
@@ -280,5 +282,3 @@ class AnimationControlPanel extends ConsumerWidget {
     }
   }
 }
-
-import 'dart:ui' as ui;

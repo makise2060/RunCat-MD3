@@ -29,7 +29,7 @@ final systemMonitorProvider = Provider<SystemMonitorService>((ref) {
 });
 
 /// 系统信息流
-final systemInfoStreamProvider = StreamProvider<SystemInfo>((ref) {
+final systemInfoStreamProvider = StreamProvider<PerformanceData>((ref) {
   final monitor = ref.watch(systemMonitorProvider);
   return monitor.systemInfoStream;
 });
@@ -44,7 +44,7 @@ final dynamicAnimationSpeedProvider = Provider<double>((ref) {
       final baseSpeed = switch (speedSource) {
         SpeedSource.cpu => info.cpuUsage,
         SpeedSource.memory => info.memoryUsage,
-        SpeedSource.gpu => info.gpuUsage,
+        SpeedSource.gpu => info.gpuUsage ?? 0.0,
       };
       
       // 将使用率映射到速度倍数 (0.5x - 3.0x)
