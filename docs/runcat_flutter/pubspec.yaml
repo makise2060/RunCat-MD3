@@ -14,6 +14,7 @@ dependencies:
   # 桌面应用支持
   window_manager: ^0.3.7
   system_tray: ^2.0.3
+  screen_retriever: ^0.1.9
   
   # 状态管理
   flutter_riverpod: ^2.4.9
@@ -37,7 +38,7 @@ dependencies:
   # 工具
   path: ^1.8.3
 
- dev_dependencies:
+dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.1
@@ -61,17 +62,4 @@ flutter:
     - assets/animations/
     - assets/animations/cat/
     - assets/animations/horse/
-    - assets/animations/parrot/  
-    - assets/images/icons/  
-    - assets/images/characters/  
-    - assets/fonts/  
-    - assets/sounds/  
-    - assets/data/  
-    
-  # 字体
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Regular.ttf
-        - asset: fonts/Roboto-Bold.ttf
-          weight: 700
+    - assets/animations/parrot/
