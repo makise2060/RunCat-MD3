@@ -7,20 +7,15 @@ RunCat 的 Flutter 重构版本，使用 Material Design 3 设计，支持 Windo
 ### 环境要求
 
 - Windows 10/11 (64位)
-- Flutter SDK 3.0+
+- Flutter SDK 3.0+ (需手动安装)
 - Visual Studio 2019/2022 (Windows 桌面开发)
 
-### 环境配置
+### 安装 Flutter
 
-由于国内网络环境，我们已经配置了 Flutter 国内镜像。运行以下命令配置环境：
-
-```powershell
-# PowerShell
-.\setup_flutter_env.ps1
-
-# 或 CMD
-setup_flutter_env.bat
-```
+1. 从 [Flutter 官网](https://docs.flutter.dev/get-started/install/windows) 下载 Flutter SDK
+2. 解压到合适的位置（如 `C:\flutter`）
+3. 将 `flutter\bin` 添加到系统 PATH
+4. 运行 `flutter doctor` 验证安装
 
 ### 运行项目
 
@@ -108,7 +103,11 @@ flutter run -d windows --verbose
 ## 🔧 常见问题
 
 ### Q: 依赖下载失败？
-A: 确保已运行 `setup_flutter_env.ps1` 配置国内镜像
+A: 配置 Flutter 国内镜像：
+```bash
+set PUB_HOSTED_URL=https://pub.flutter-io.cn
+set FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+```
 
 ### Q: Windows 构建失败？
 A: 安装 Visual Studio 并勾选 "Desktop development with C++"
