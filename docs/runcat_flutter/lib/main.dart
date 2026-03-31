@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:window_manager/window_manager.dart';
 import 'services/system_tray_service.dart';
 import 'services/system_monitor_service.dart';
-import 'widgets/animation_player.dart';
+import 'widgets/character_animation.dart';
+import 'models/runner_character.dart';
+import 'providers/animation_providers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -181,19 +183,19 @@ class _RunCatHomePageState extends ConsumerState<RunCatHomePage> {
                         color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.pets,
-                              size: 48,
-                              color: Colors.orange,
-                            ),
-                            SizedBox(height: 8),
-                            Text('猫咪动画'),
-                          ],
-                        ),
+                      child: Consumer(
+                        builder: (context, ref, child) {
+                          final selectedCharacter = ref.watch(selectedCharacterProvider);
+                          final effectiveSpeed = ref.watch(effectiveAnimationSpeedProvider);
+                          final reverse = ref.watch(reverseAnimationProvider);
+                          
+                          return CharacterAnimationWidget(
+                            characterType: selectedCharacter,
+                            speed: effectiveSpeed,
+                            reverse: reverse,
+                            size: const Size(96, 96),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -204,12 +206,24 @@ class _RunCatHomePageState extends ConsumerState<RunCatHomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            // TODO: 打开设置窗口
+                        Consumer(
+                          builder: (context, ref, child) {
+                            final selectedCharacter = ref.watch(selectedCharacterProvider);
+                            return DropdownButton<CharacterType>(
+                              value: selectedCharacter,
+                              items: CharacterType.values.map((type) {
+                                return DropdownMenuItem(
+                                  value: type,
+                                  child: Text(_getCharacterName(type)),
+                                );
+                              }).toList(),
+                              onChanged: (type) {
+                                if (type != null) {
+                                  ref.read(selectedCharacterProvider.notifier).state = type;
+                                }
+                              },
+                            );
                           },
-                          icon: const Icon(Icons.settings),
-                          label: const Text('设置'),
                         ),
                         ElevatedButton.icon(
                           onPressed: _hideWindow,
@@ -285,5 +299,16 @@ class _RunCatHomePageState extends ConsumerState<RunCatHomePage> {
         ],
       ),
     );
+  }
+
+  String _getCharacterName(CharacterType type) {
+    switch (type) {
+      case CharacterType.cat:
+        return '猫咪';
+      case CharacterType.horse:
+        return '马儿';
+      case CharacterType.parrot:
+        return '鹦鹉';
+    }
   }
 }

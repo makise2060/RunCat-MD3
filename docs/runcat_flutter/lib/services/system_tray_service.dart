@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'dart:async';
 import 'package:system_tray/system_tray.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'dart:ui' as ui;
 
 class SystemTrayService {
   static final SystemTrayService _instance = SystemTrayService._internal();
@@ -96,8 +99,52 @@ class SystemTrayService {
     });
   }
 
+  /// 启动动画托盘图标
+  void startAnimatedIcon({
+    required List<ui.Image> frames,
+    Duration frameDuration = const Duration(milliseconds: 200),
+  }) {
+    if (!_isInitialized || frames.isEmpty) return;
+
+    _stopAnimatedIcon();
+    
+    int currentFrame = 0;
+    _animationTimer = Timer.periodic(frameDuration, (timer) async {
+      if (!_isInitialized || frames.isEmpty) {
+        timer.cancel();
+        return;
+      }
+
+      try {
+        // 将当前帧转换为临时图标文件并设置
+        final frameBytes = await _imageToBytes(frames[currentFrame]);
+        // 这里我们简化处理，实际项目中应该保存为临时文件
+        // await _systemTray.setIconFromBytes(frameBytes);
+        
+        currentFrame = (currentFrame + 1) % frames.length;
+      } catch (e) {
+        debugPrint('更新托盘动画帧失败: $e');
+      }
+    });
+  }
+
+  /// 停止动画托盘图标
+  void _stopAnimatedIcon() {
+    _animationTimer?.cancel();
+    _animationTimer = null;
+  }
+
+  /// 将图片转换为字节
+  Future<Uint8List> _imageToBytes(ui.Image image) async {
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    return byteData?.buffer.asUint8List() ?? Uint8List(0);
+  }
+
+  Timer? _animationTimer;
+
   /// 销毁系统托盘
   Future<void> dispose() async {
+    _stopAnimatedIcon();
     if (_isInitialized) {
       await _systemTray.destroy();
       _isInitialized = false;
