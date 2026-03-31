@@ -1,94 +1,96 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+本文件为 Claude Code (claude.ai/code) 提供本仓库代码开发指南。
 
-## You Must
+## 必须遵守的规范
 
-- Please respond in Japanese.
-- Commit to Git only when instructed.
-- If multiple requirements are given in a single instruction, divide the commits into appropriate sizes/granularities.
+- 请使用中文进行回复。
+- 仅在收到明确指令时方可提交至 Git。
+- 若单条指令包含多项需求，请按适当粒度拆分提交。
 
-## Build & Development
+## 构建与开发
 
-This is a Windows Forms application (.NET 9.0 / C#) for Microsoft Store distribution.
+本项目为面向 Microsoft Store 分发的 Windows Forms 应用程序（.NET 9.0 / C#）。
 
-**Solution structure:**
+**解决方案结构：**
 
-- `RunCat365.sln` - Main solution file
-- `RunCat365/` - Main application project
-- `WapForStore/` - Windows Application Packaging project for Microsoft Store
+- `RunCat365.sln` - 主解决方案文件
+- `RunCat365/` - 主应用程序项目
+- `WapForStore/` - 适用于 Microsoft Store 的 Windows 应用程序打包项目
 
-**Build:**
+**构建方式：**
 
-- Open `RunCat365.sln` in Visual Studio
-- Supported platforms: x64, x86, ARM64
-- Target framework: .NET 9.0 (Windows 10.0.26100.0)
+- 在 Visual Studio 中打开 `RunCat365.sln`
+- 支持平台：x64、x86、ARM64
+- 目标框架：.NET 9.0（Windows 10.0.26100.0）
 
-**Version numbers** must be updated in two places when releasing:
+**版本号管理：**
 
-1. `RunCat365/RunCat365.csproj` - `<Version>X.Y.Z</Version>` (3-digit)
-2. `WapForStore/Package.appxmanifest` - `Version="X.Y.Z.0"` in `<Identity>` element (4-digit)
+发布时须在以下两处同步更新版本号：
 
-## Architecture
+1. `RunCat365/RunCat365.csproj` - `<Version>X.Y.Z</Version>`（三位版本号）
+2. `WapForStore/Package.appxmanifest` - `<Identity>` 元素中的 `Version="X.Y.Z.0"`（四位版本号）
 
-**Entry point:** `Program.cs` contains `RunCat365ApplicationContext` which manages the application lifecycle as a system tray application.
+## 架构设计
 
-**Core components:**
+**入口点：** `Program.cs` 中包含 `RunCat365ApplicationContext`，负责管理系统托盘应用程序的生命周期。
 
-- `ContextMenuManager` - Manages the system tray icon, context menu, and notification icon animation; uses `iconLock` for thread-safe icon updates
-- `Runner` - Enum for animation types (Cat, Parrot, Horse) with frame counts
-- `EndlessGameForm` - Mini-game featuring the running cat
-- `LaunchAtStartupManager` - Startup registration via Windows App Runtime
+**核心组件：**
 
-**System information repositories (Repository pattern):**
+- `ContextMenuManager` - 管理系统托盘图标、上下文菜单及通知图标动画；使用 `iconLock` 实现线程安全的图标更新
+- `Runner` - 动画类型枚举（Cat、Parrot、Horse）及帧数定义
+- `EndlessGameForm` - 以奔跑猫咪为主题的迷你游戏
+- `LaunchAtStartupManager` - 通过 Windows App Runtime 实现开机启动注册
 
-- `CPURepository` - CPU usage via PerformanceCounter
-- `GPURepository` - GPU usage monitoring
-- `MemoryRepository` - Memory usage
-- `StorageRepository` - Disk usage
-- `NetworkRepository` - Network statistics
+**系统信息仓库（Repository 模式）：**
 
-**Animation flow:**
+- `CPURepository` - 通过 PerformanceCounter 获取 CPU 使用率
+- `GPURepository` - GPU 使用率监控
+- `MemoryRepository` - 内存使用率
+- `StorageRepository` - 磁盘使用率
+- `NetworkRepository` - 网络统计信息
 
-1. `fetchTimer` (1s interval) updates system info into `*Info` structs (CPUInfo, GPUInfo, etc.)
-2. `animateTimer` advances frames based on the selected `SpeedSource` (CPU/GPU/Memory)
-3. `BitmapExtension` handles theme-aware icon recoloring and conversion
+**动画流程：**
 
-**EndlessGame components:**
+1. `fetchTimer`（1 秒间隔）将系统信息更新至 `*Info` 结构体（CPUInfo、GPUInfo 等）
+2. `animateTimer` 根据选定的 `SpeedSource`（CPU/GPU/Memory）推进帧动画
+3. `BitmapExtension` 处理主题感知的图标重着色与转换
 
-- `Cat` - Running/Jumping state and collision frame data
-- `Road` - Obstacle types (Flat/Hill/Crater/Sprout)
-- `GameStatus` - Game state (NewGame/Playing/GameOver)
+**EndlessGame 组件：**
 
-**Utilities:**
+- `Cat` - 奔跑/跳跃状态及碰撞帧数据
+- `Road` - 障碍物类型（Flat/Hill/Crater/Sprout）
+- `GameStatus` - 游戏状态（NewGame/Playing/GameOver）
 
-- `ByteFormatter` - Formats byte values to human-readable strings (B/KB/MB/GB/TB)
-- `TreeFormatter` - Formats system info for context menu display (language-aware)
+**工具类：**
 
-**Settings:**
+- `ByteFormatter` - 将字节值格式化为人类可读的字符串（B/KB/MB/GB/TB）
+- `TreeFormatter` - 格式化系统信息以供上下文菜单显示（支持多语言）
 
-- `Properties/UserSettings.settings` - User preferences (Runner, Theme, SpeedSource, FPSMaxLimit)
-- `Properties/Resources.resx` - Embedded images and icons
-- `Properties/Strings.resx` - Localized strings (English default);
-  - `Strings.zh-CN.resx` (Chinese (simplified))
-  - `Strings.zh-TW.resx` (Chinese (traditional))
-  - `Strings.fr.resx` (French)
-  - `Strings.de.resx` (German)
-  - `Strings.ja.resx` (Japanese)
-  - `Strings.es.resx` (Spanish)
+**设置：**
 
-**Localization notes:**
+- `Properties/UserSettings.settings` - 用户偏好设置（Runner、Theme、SpeedSource、FPSMaxLimit）
+- `Properties/Resources.resx` - 嵌入的图像与图标资源
+- `Properties/Strings.resx` - 本地化字符串（默认英文）；
+  - `Strings.zh-CN.resx`（简体中文）
+  - `Strings.zh-TW.resx`（繁体中文）
+  - `Strings.fr.resx`（法语）
+  - `Strings.de.resx`（德语）
+  - `Strings.ja.resx`（日语）
+  - `Strings.es.resx`（西班牙语）
 
-- Add new strings to all seven `.resx` files simultaneously
-- English/Spanish/French/German use "Consolas"
-- Japanese uses "Noto Sans JP" font
-- Chinese (simplified) uses "Microsoft YaHei" font
-- Chinese (traditional) uses "Microsoft JhengHei" font
+**本地化注意事项：**
 
-## Coding Rules
+- 新增字符串须同时添加至全部七个 `.resx` 文件
+- 英文/西班牙文/法文/德文使用 "Consolas" 字体
+- 日文使用 "Noto Sans JP" 字体
+- 简体中文使用 "Microsoft YaHei" 字体
+- 繁体中文使用 "Microsoft JhengHei" 字体
 
-- Do not write comments within the source code.
-- Use naming conventions that clearly indicate the purpose of the code, even without comments.
-- In C# code:
-  - Abbreviations such as URL or ID should be written in all lowercase or all uppercase (do not use Upper Camel Case for these prefixes).
-  - Do not use abbreviations such as `img` for `image` or `cnt` for `count`.
+## 编码规范
+
+- 禁止在源代码中编写注释。
+- 使用能够清晰表达代码用途的命名规范，即使无注释也能理解。
+- C# 代码规范：
+  - 缩写词如 URL 或 ID 应全部小写或全部大写（请勿使用首字母大写的驼峰式）。
+  - 禁止使用 `img` 代替 `image`、`cnt` 代替 `count` 等缩写形式。

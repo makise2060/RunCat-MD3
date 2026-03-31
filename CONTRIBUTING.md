@@ -1,130 +1,130 @@
-# Contributing to RunCat365
+# 参与贡献 RunCat365
 
-Thank you for your interest in contributing to **RunCat365** 🐈  
-RunCat365 is a Windows system monitoring application represented as a running cat animation.
+感谢您有兴趣为 **RunCat365** 做出贡献 🐈  
+RunCat365 是一款以奔跑猫咪动画形式呈现的 Windows 系统监控应用程序。
 
-All kinds of contributions are welcome: bug reports, feature requests, and code contributions.
+我们欢迎各类贡献：错误报告、功能请求以及代码贡献。
 
-This document describes the rules, steps, and expectations for contributing to this project.
-
----
-
-## Before Getting Started
-
-- **Only contributions in English are accepted.** Any contribution in another language may be closed.
-- **This project is Windows-only.** Issues or requests related to Linux, macOS, or other platforms will not be accepted.
-- Always use the provided **Issue** and **Pull Request** templates. Submissions that do not follow the templates may be closed.
-- Be respectful, constructive, and professional in all interactions.
+本文档描述了参与本项目贡献的规则、步骤及期望。
 
 ---
 
-## Table of Contents
+## 开始之前
 
-- [Before Getting Started](#before-getting-started)
+- **仅接受英文贡献。** 任何其他语言的贡献可能会被关闭。
+- **本项目仅支持 Windows 平台。** 与 Linux、macOS 或其他平台相关的问题或请求将不被接受。
+- 请务必使用提供的 **Issue** 和 **Pull Request** 模板。未遵循模板的提交可能会被关闭。
+- 在所有交流中保持尊重、建设性和专业态度。
+
+---
+
+## 目录
+
+- [开始之前](#开始之前)
 - [Issues](#issues)
-  - [Bug Reports](#bug-reports)
-  - [Feature Requests](#feature-requests)
-  - [Other Issues](#other-issues)
+  - [错误报告](#错误报告)
+  - [功能请求](#功能请求)
+  - [其他问题](#其他问题)
 - [Pull Requests](#pull-requests)
-  - [Before Opening a Pull Request](#before-opening-a-pull-request)
-  - [Cloning and Working on the Repository](#cloning-and-working-on-the-repository)
-  - [Submitting a Pull Request](#submitting-a-pull-request)
-- [Code Style Guidelines](#code-style-guidelines)
-- [Review Process](#review-process)
-- [Thank You](#thank-you)
+  - [提交 Pull Request 之前](#提交-pull-request-之前)
+  - [克隆并处理仓库](#克隆并处理仓库)
+  - [提交 Pull Request](#提交-pull-request)
+- [代码风格指南](#代码风格指南)
+- [审核流程](#审核流程)
+- [致谢](#致谢)
 
 ---
 
 ## Issues
 
-### Bug Reports
+### 错误报告
 
-To report a bug:
+报告错误的步骤：
 
-1. Make sure there is no existing issue reporting the same bug.  
-   If one exists, add any additional relevant information as a comment instead of creating a new issue.
-2. Click `New issue` and select the `Bug Report` template.
-3. Follow all checklist steps and confirm that the bug still occurs.
-4. Provide clear and complete information. More details help maintainers resolve the issue faster.
-5. Submit the issue and stay attentive, as maintainers may request additional information.
-
----
-
-### Feature Requests
-
-To suggest a new feature:
-
-1. Check if a similar feature request already exists.  
-   If so, please contribute to the existing discussion instead of opening a new one.
-2. Ensure your suggestion benefits a broad range of users and is not only a personal preference.
-3. Click `New issue` and select the `Feature Request` template.
-4. Fill out the template as clearly and completely as possible.
-5. Submit the issue and remain available for follow-up questions.
+1. 确认不存在报告相同错误的现有 Issue。  
+   若已存在，请以评论形式补充相关信息，而非创建新 Issue。
+2. 点击 `New issue` 并选择 `Bug Report` 模板。
+3. 遵循所有清单步骤，确认该错误仍可复现。
+4. 提供清晰完整的信息。更多细节有助于维护者更快地解决问题。
+5. 提交 Issue 并保持关注，因为维护者可能会要求提供额外信息。
 
 ---
 
-### Other Issues
+### 功能请求
+
+提出新功能的步骤：
+
+1. 检查是否已存在类似的功能请求。  
+   若存在，请参与现有讨论，而非开启新讨论。
+2. 确保您的建议能使广泛用户受益，而非仅满足个人偏好。
+3. 点击 `New issue` 并选择 `Feature Request` 模板。
+4. 尽可能清晰完整地填写模板。
+5. 提交 Issue 并保持在线以便回答后续问题。
+
+---
+
+### 其他问题
 
 > [!IMPORTANT]
-> This option is only for issues that do not fit into the categories above.
-> Issues that do not use the appropriate template will be closed without notice.
+> 此选项仅适用于不符合上述类别的问题。
+> 未使用适当模板的问题将被直接关闭，恕不另行通知。
 
-1. Click `New issue` and select `Blank issue`.
-2. Describe your request clearly and in detail.
-3. Submit the issue and stay attentive to maintainer feedback.
+1. 点击 `New issue` 并选择 `Blank issue`。
+2. 清晰详细地描述您的请求。
+3. 提交 Issue 并关注维护者的反馈。
 
 ---
 
 ## Pull Requests
 
-### Before Opening a Pull Request
+### 提交 Pull Request 之前
 
-- **.NET 9.0** is required.
-- All code must be written in **English**.  
-  Use the localization system for user-facing text in other languages.
-- Use the **[Allman indentation style](https://en.wikipedia.org/wiki/Indentation_style#Allman_style)**.
-- Use `var` when the type is obvious from the assignment.
-- Follow the existing formatting and conventions used in the codebase.
-- Keep each pull request focused on **a single change or context**.
-  For multiple unrelated changes, create separate pull requests.
-- Keep code clean, readable, and easy to understand.
-- This repository is licensed under **Apache-2.0**.
+- 需要 **.NET 9.0** 环境。
+- 所有代码必须使用 **英文** 编写。  
+  面向用户的其他语言文本请使用本地化系统。
+- 使用 **[Allman 缩进风格](https://en.wikipedia.org/wiki/Indentation_style#Allman_style)**。
+- 当类型可从赋值语句明显推断时，使用 `var`。
+- 遵循代码库中现有的格式和约定。
+- 每个 Pull Request 专注于**单一变更或上下文**。  
+  对于多个不相关的变更，请创建单独的 Pull Request。
+- 保持代码整洁、可读且易于理解。
+- 本仓库采用 **Apache-2.0** 许可证。
 
 ---
 
-### Cloning and Working on the Repository
+### 克隆并处理仓库
 
-1. Fork the `main` branch.
-2. Make sure Git is installed.
-3. Clone your fork locally:
+1. Fork `main` 分支。
+2. 确保已安装 Git。
+3. 将您的 Fork 克隆到本地：
 
    ```bash
    git clone https://github.com/your-username/RunCat365.git
    cd RunCat365
    ```
-4. Create a new branch:
+4. 创建新分支：
 
    ```bash
    git switch -c branch-name
    ```
 
-   Use a short, descriptive branch name.
-5. Make your changes using your preferred IDE
-   (Visual Studio is recommended).
-6. Keep functions within their respective classes.
-7. Verify that the project builds and runs without errors.
-8. Ensure no unnecessary or accidental changes were made.
-9. Stage your changes:
+   使用简短、描述性的分支名称。
+5. 使用您偏好的 IDE 进行更改
+   （推荐使用 Visual Studio）。
+6. 将函数保留在其各自的类中。
+7. 验证项目能够构建并正常运行，无错误。
+8. 确保没有进行不必要或意外的更改。
+9. 暂存您的更改：
 
    ```bash
    git add .
    ```
-10. Commit your changes:
+10. 提交您的更改：
 
     ```bash
     git commit -m "Clear and descriptive commit message"
     ```
-11. Push the branch:
+11. 推送分支：
 
     ```bash
     git push origin branch-name
@@ -132,37 +132,37 @@ To suggest a new feature:
 
 ---
 
-### Submitting a Pull Request
+### 提交 Pull Request
 
-1. Click **New pull request**.
-2. Select the branch you worked on.
-3. Choose the type of contribution.
-4. Fill in all requested information clearly and completely.
-5. Ensure all checklist items are satisfied.
-6. Submit the pull request.
-
----
-
-## Code Style Guidelines
-
-* Follow existing project conventions.
-* Use the [Allman indentation style](https://en.wikipedia.org/wiki/Indentation_style#Allman_style).
-* Use meaningful and descriptive names.
-* Avoid unnecessary complexity.
-* Prefer readable and self-explanatory code over clever solutions.
+1. 点击 **New pull request**。
+2. 选择您处理过的分支。
+3. 选择贡献类型。
+4. 清晰完整地填写所有请求信息。
+5. 确保满足所有清单项。
+6. 提交 Pull Request。
 
 ---
 
-## Review Process
+## 代码风格指南
 
-* Pull requests are reviewed as time permits.
-* Not all contributions are guaranteed to be accepted.
-* Maintainers may request changes before merging.
-* Inactive or non-responsive pull requests may be closed.
+* 遵循现有项目约定。
+* 使用 [Allman 缩进风格](https://en.wikipedia.org/wiki/Indentation_style#Allman_style)。
+* 使用有意义且描述性的名称。
+* 避免不必要的复杂性。
+* 优先选择可读且自解释的代码，而非巧妙的解决方案。
 
 ---
 
-## Thank You
+## 审核流程
 
-Thank you again for contributing to **RunCat365**.
-Your time and effort help make this project better for everyone 😸
+* Pull Request 将在时间允许的情况下进行审核。
+* 不保证所有贡献都会被接受。
+* 维护者可能会在合并前要求更改。
+* 不活跃或无响应的 Pull Request 可能会被关闭。
+
+---
+
+## 致谢
+
+再次感谢您为 **RunCat365** 做出贡献。  
+您的时间和努力帮助这个项目变得更好 😸
