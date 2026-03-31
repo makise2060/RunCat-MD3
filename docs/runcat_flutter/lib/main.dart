@@ -80,8 +80,11 @@ class _RunCatHomePageState extends ConsumerState<RunCatHomePage> {
     
     _trayService.setLeftClickCallback(_toggleWindow);
     
-    // 开始系统监控
-    _monitorService.startMonitoring();
+    // 初始化并启动系统监控
+    final initialized = await _monitorService.initialize();
+    if (initialized) {
+      _monitorService.startMonitoring();
+    }
   }
 
   void _showWindow() {
@@ -243,28 +246,35 @@ class _RunCatHomePageState extends ConsumerState<RunCatHomePage> {
   }
 
   Widget _buildSystemInfoCards() {
-    return StreamBuilder<SystemInfo>(
+    return StreamBuilder<PerformanceData>(
       stream: _monitorService.systemInfoStream,
       builder: (context, snapshot) {
-        final info = snapshot.data;
+        final data = snapshot.data;
         
         return Wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
-            _buildInfoCard('CPU', info?.cpuUsage ?? 0, Colors.blue),
-            _buildInfoCard('内存', info?.memoryUsage ?? 0, Colors.green),
-            _buildInfoCard('GPU', info?.gpuUsage ?? 0, Colors.purple),
+            _buildInfoCard('CPU', data?.cpuUsage ?? 0, Colors.blue),
+            _buildInfoCard(
+              '内存', 
+              data?.memoryUsage ?? 0, 
+              Colors.green,
+              subtitle: data != null 
+                ? '${data.memoryUsedGB.toStringAsFixed(1)}/${data.memoryTotalGB.toStringAsFixed(1)} GB'
+                : null,
+            ),
+            _buildInfoCard('GPU', data?.gpuUsage ?? 0, Colors.purple),
           ],
         );
       },
     );
   }
 
-  Widget _buildInfoCard(String label, double value, Color color) {
+  Widget _buildInfoCard(String label, double value, Color color, {String? subtitle}) {
     return Container(
       width: 100,
-      height: 80,
+      height: subtitle != null ? 90 : 80,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
@@ -290,6 +300,14 @@ class _RunCatHomePageState extends ConsumerState<RunCatHomePage> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          if (subtitle != null)
+            Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: 10,
+                color: color.withOpacity(0.8),
+              ),
+            ),
           LinearProgressIndicator(
             value: value / 100,
             backgroundColor: color.withOpacity(0.2),
