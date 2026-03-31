@@ -59,6 +59,14 @@ flutter:
   assets:
     - assets/images/
     - assets/animations/
+    - assets/animations/cat/
+    - assets/animations/horse/
+    - assets/animations/parrot/  
+    - assets/images/icons/  
+    - assets/images/characters/  
+    - assets/fonts/  
+    - assets/sounds/  
+    - assets/data/  
     
   # 字体
   fonts:

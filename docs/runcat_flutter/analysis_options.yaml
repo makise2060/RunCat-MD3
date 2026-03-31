@@ -1,0 +1,40 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # 代码风格
+    prefer_single_quotes: true
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_final_fields: true
+    prefer_final_locals: true
+    
+    # 性能优化
+    avoid_print: false  # 开发阶段允许 print
+    avoid_unnecessary_containers: true
+    avoid_redundant_argument_values: true
+    
+    # 代码质量
+    avoid_relative_lib_imports: true
+    directives_ordering: true
+    lines_longer_than_80_chars: false  # 现代显示器可以更宽
+    
+    # 文档
+    public_member_api_docs: false  # 开发阶段暂时关闭
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/generated_plugin_registrant.dart"
+  
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  
+  errors:
+    invalid_annotation_target: ignore
+    missing_required_param: error
+    missing_return: error
+    dead_code: info
+    todo: ignore  # 开发阶段忽略 TODO 警告
